@@ -13,42 +13,40 @@
     <a href="index.html" style="text-decoration: none; color: inherit;">
       <div class="logo">Memojar</div>
     </a>
-    <div class="user-profile">
-      <a href="user-profile.html">
+    <a href="userprofile.html" style="text-decoration: none; color: inherit;">
+      <div class="user-profile">
         <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User" class="profile-icon">
-      </a>
-    </div>
+      </div>
+    </a>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main Body -->
   <main>
-    <section id="user-profile-section">
-      <h2>User Profile</h2>
-      <div class="profile-info">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile Picture" id="profile-picture">
-        <div class="profile-details">
-          <p><strong>Name:</strong> <span id="user-name">John Doe</span></p>
-          <p><strong>Username:</strong> <span id="user-username">@johndoe</span></p>
-          <button onclick="toggleEditMode()">Edit Profile</button>
-        </div>
+    <section id="user-details">
+      <h2>Edit Profile</h2>
+      
+      <!-- Profile Picture and Name -->
+      <div class="profile-picture">
+        <img id="profile-image" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile Picture">
+        <input type="file" id="file-input" accept="image/*" onchange="previewImage(event)" />
       </div>
+      
+      <!-- Edit Name and Username -->
+      <form id="profile-form">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter full name" required>
 
-      <!-- Edit Profile Form (Initially Hidden) -->
-      <div id="edit-profile-form" class="edit-form" style="display: none;">
-        <h3>Edit Your Profile</h3>
-        <form id="edit-form">
-          <label for="edit-name">Name</label>
-          <input type="text" id="edit-name" value="John Doe" required>
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter username" required>
 
-          <label for="edit-username">Username</label>
-          <input type="text" id="edit-username" value="@johndoe" required>
+        <button type="submit" class="save-button">Save</button>
+      </form>
+    </section>
 
-          <label for="edit-pic">Profile Picture URL</label>
-          <input type="text" id="edit-pic" value="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
-
-          <button type="button" onclick="saveChanges()">Save Changes</button>
-          <button type="button" onclick="cancelEdit()">Cancel</button>
-        </form>
+    <section id="my-memories">
+      <h2>My Memories</h2>
+      <div id="memories-list">
+        <!-- Memories will be displayed here -->
       </div>
     </section>
   </main>
@@ -56,11 +54,10 @@
   <!-- Footer -->
   <footer>
     <div class="footer-links">
-      <a href="#">Home</a>
-      <a href="#">Contact</a>
-      <a href="#">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a>
       <a href="privacy.html">Privacy</a>
-      <a href="#">Terms & Conditions</a>
+      <a href="terms.html">Terms & Conditions</a>
     </div>
     <div class="social-media">
       <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
@@ -70,7 +67,7 @@
       <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Snapchat"></a>
     </div>
     <div class="copyright">
-      ©2025 Memojar
+      ©2025 Memojar.
     </div>
   </footer>
 
