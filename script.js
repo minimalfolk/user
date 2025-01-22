@@ -1,35 +1,25 @@
-// script.js
-
-// Get modal element
-var modal = document.getElementById("profile-modal");
-
-// Get open modal button
-var profileIcon = document.getElementById("profile-icon");
-
-// Get close button
-var closeModal = document.getElementById("close-modal");
-
-// Listen for open click
-profileIcon.addEventListener("click", openModal);
-
-// Listen for close click
-closeModal.addEventListener("click", closeModalFunction);
-
-// Function to open modal
-function openModal() {
-  modal.style.display = "block";
+function toggleEditMode() {
+  document.getElementById('edit-profile-form').style.display = 'block';
+  document.getElementById('user-name').style.display = 'none';
+  document.getElementById('user-username').style.display = 'none';
+  document.querySelector('button').style.display = 'none';
 }
 
-// Function to close modal
-function closeModalFunction() {
-  modal.style.display = "none";
+function cancelEdit() {
+  document.getElementById('edit-profile-form').style.display = 'none';
+  document.getElementById('user-name').style.display = 'inline';
+  document.getElementById('user-username').style.display = 'inline';
+  document.querySelector('button').style.display = 'inline';
 }
 
-// Close modal if outside click
-window.addEventListener("click", outsideClick);
+function saveChanges() {
+  const newName = document.getElementById('edit-name').value;
+  const newUsername = document.getElementById('edit-username').value;
+  const newPic = document.getElementById('edit-pic').value;
 
-function outsideClick(e) {
-  if (e.target == modal) {
-    modal.style.display = "none";
-  }
+  document.getElementById('user-name').textContent = newName;
+  document.getElementById('user-username').textContent = newUsername;
+  document.getElementById('profile-picture').src = newPic;
+
+  cancelEdit(); // Close the form after saving
 }
