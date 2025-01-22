@@ -1,25 +1,81 @@
-function toggleEditMode() {
-  document.getElementById('edit-profile-form').style.display = 'block';
-  document.getElementById('user-name').style.display = 'none';
-  document.getElementById('user-username').style.display = 'none';
-  document.querySelector('button').style.display = 'none';
+// Load the saved user profile information from localStorage when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  loadProfile();
+  loadMemories();
+});
+
+// Load profile data from localStorage
+function loadProfile() {
+  const name = localStorage.getItem('name');
+  const username = localStorage.getItem('username');
+  const profileImage = localStorage.getItem('profileImage');
+
+  if (name) {
+    document.getElementById('name').value = name;
+  }
+  
+  if (username) {
+    document.getElementById('username').value = username;
+  }
+
+  if (profileImage) {
+    document.getElementById('profile-image').src = profileImage;
+  }
 }
 
-function cancelEdit() {
-  document.getElementById('edit-profile-form').style.display = 'none';
-  document.getElementById('user-name').style.display = 'inline';
-  document.getElementById('user-username').style.display = 'inline';
-  document.querySelector('button').style.display = 'inline';
+// Handle profile picture upload
+function previewImage(event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = function(e) {
+    document.getElementById('profile-image').src = e.target.result;
+    localStorage.setItem('profileImage', e.target.result);
+  };
+  
+  reader.readAsDataURL(file);
 }
 
-function saveChanges() {
-  const newName = document.getElementById('edit-name').value;
-  const newUsername = document.getElementById('edit-username').value;
-  const newPic = document.getElementById('edit-pic').value;
+// Handle form submission for profile edits
+document.getElementById('profile-form').addEventListener('submit', function(e) {
+  e.preventDefault();
 
-  document.getElementById('user-name').textContent = newName;
-  document.getElementById('user-username').textContent = newUsername;
-  document.getElementById('profile-picture').src = newPic;
+  const name = document.getElementById('name').value;
+  const username = document.getElementById('username').value;
 
-  cancelEdit(); // Close the form after saving
+  // Check if the username is available (basic check for existing username)
+  if (isUsernameAvailable(username)) {
+    localStorage.setItem('name', name);
+    localStorage.setItem('username', username);
+
+    alert('Profile updated successfully!');
+    loadProfile(); // Reload profile data
+  } else {
+    alert('Username is already taken, please choose another one.');
+  }
+});
+
+// Basic check for existing usernames (you can expand this to check with a real database)
+function isUsernameAvailable(username) {
+  // Simulate existing usernames with an array
+  const existingUsernames = ['johnDoe', 'janeDoe', 'admin'];
+  
+  return !existingUsernames.includes(username);
+}
+
+// Load memories from localStorage (if any)
+function loadMemories() {
+  const memories = JSON.parse(localStorage.getItem('memories')) || [];
+  const memoriesList = document.getElementById('memories-list');
+
+  memories.forEach(memory => {
+    const memoryElement = document.createElement('div');
+    memoryElement.classList.add('memory-card');
+    memoryElement.innerHTML = `
+      <h3>${memory.category}</h3>
+      <p><strong>${memory.topic}</strong></p>
+      <p>${memory.details}</p>
+    `;
+    memoriesList.appendChild(memoryElement);
+  });
 }
