@@ -3,66 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memo</title>
+  <title>User Profile - Memojar</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Header -->
   <header>
-    <div class="logo">Memo</div>
+    <a href="index.html" style="text-decoration: none; color: inherit;">
+      <div class="logo">Memojar</div>
+    </a>
     <div class="user-profile">
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User" class="profile-icon" id="profile-icon">
+      <a href="user-profile.html">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User" class="profile-icon">
+      </a>
     </div>
   </header>
 
-  <!-- User Profile Modal -->
-  <div id="profile-modal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="close-modal">&times;</span>
-      <h2>User Profile</h2>
-      <p><strong>Name:</strong> John Doe</p>
-      <p><strong>Username:</strong> johndoe</p>
-      <p><strong>Describe yourself:</strong> Web Developer and Designer.</p>
-      <button id="edit-profile">Edit Profile</button>
-      <h3>Shares</h3>
-      <ul>
-        <li>Shared Memory 1</li>
-        <li>Shared Memory 2</li>
-        <!-- Add more shared memories as needed -->
-      </ul>
-    </div>
-  </div>
-
-  <!-- Main Body -->
+  <!-- Main Content -->
   <main>
-    <!-- Add Memories Section -->
-    <section id="add-memory">
-      <h2>Add a Memory</h2>
-      <form id="memory-form">
-        <label for="memory-category">Category</label>
-        <select id="memory-category">
-          <option value="Personal">Personal</option>
-          <option value="Family">Family</option>
-          <option value="Achievement">Achievement</option>
-          <option value="Relationship">Relationship</option>
-        </select>
-        
-        <label for="memory-topic">Memory Topic</label>
-        <input type="text" id="memory-topic" placeholder="Enter memory topic" required>
-        
-        <label for="memory-details">Details</label>
-        <textarea id="memory-details" placeholder="Write about your memory..." required></textarea>
-        
-        <button type="submit" class="animated-button">Add Memory</button>
-      </form>
-    </section>
+    <section id="user-profile-section">
+      <h2>User Profile</h2>
+      <div class="profile-info">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile Picture" id="profile-picture">
+        <div class="profile-details">
+          <p><strong>Name:</strong> <span id="user-name">John Doe</span></p>
+          <p><strong>Username:</strong> <span id="user-username">@johndoe</span></p>
+          <button onclick="toggleEditMode()">Edit Profile</button>
+        </div>
+      </div>
 
-    <!-- Display Memories Section -->
-    <section id="memory-list">
-      <h2>My Memories</h2>
-      <div id="memories">
-        <!-- Memories will appear here -->
+      <!-- Edit Profile Form (Initially Hidden) -->
+      <div id="edit-profile-form" class="edit-form" style="display: none;">
+        <h3>Edit Your Profile</h3>
+        <form id="edit-form">
+          <label for="edit-name">Name</label>
+          <input type="text" id="edit-name" value="John Doe" required>
+
+          <label for="edit-username">Username</label>
+          <input type="text" id="edit-username" value="@johndoe" required>
+
+          <label for="edit-pic">Profile Picture URL</label>
+          <input type="text" id="edit-pic" value="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+          <button type="button" onclick="saveChanges()">Save Changes</button>
+          <button type="button" onclick="cancelEdit()">Cancel</button>
+        </form>
       </div>
     </section>
   </main>
@@ -73,7 +59,7 @@
       <a href="#">Home</a>
       <a href="#">Contact</a>
       <a href="#">About</a>
-      <a href="#">Privacy</a>
+      <a href="privacy.html">Privacy</a>
       <a href="#">Terms & Conditions</a>
     </div>
     <div class="social-media">
@@ -84,7 +70,7 @@
       <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Snapchat"></a>
     </div>
     <div class="copyright">
-      ©2025 Memo
+      ©2025 Memojar
     </div>
   </footer>
 
